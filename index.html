@@ -40,18 +40,63 @@
 
     <main>
         <section class="hero">
-            <h1>List Your SaaS Where Top Buyers Are Looking</h1>
-            <p>Join the leading marketplace for SaaS acquisitions. Get your business in front of serious buyers and maximize your exit value.</p>
-            <div class="hero-buttons">
-                <button class="btn-primary" id="heroJoinButton">List Your SaaS</button>
-                <button class="btn-secondary">View Recent Exits</button>
+            <div class="hero-content">
+                <h1>The Trusted Marketplace for Buying & Selling SaaS Businesses</h1>
+                
+                <div class="hero-description">
+                    <p class="main-pitch">
+                        Connect directly with verified SaaS buyers and sellers. No middlemen, no hidden fees - just transparent deals through X/Twitter.
+                    </p>
+                </div>
+
+                <div class="hero-features">
+                    <div class="feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Free listings with detailed metrics</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Direct communication via X/Twitter</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>No platform fees or commissions</span>
+                    </div>
+                </div>
+
+                <div class="hero-cta">
+                    <button class="btn-primary cta-button" id="heroJoinButton">
+                        Get Started - It's Free
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <br>
+                    <br>
+                    <p class="cta-subtext">Join hundreds of SaaS founders and buyers</p>
+                </div>
+
+                <div class="hero-metrics">
+                    <div class="metric">
+                        <span class="metric-value">100+</span>
+                        <span class="metric-label">Active Listings</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-value">$0</span>
+                        <span class="metric-label">Platform Fees</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-value">24/7</span>
+                        <span class="metric-label">Direct Access</span>
+                    </div>
+                </div>
             </div>
         </section>
 
         <section id="listings" class="featured-listings">
             <h2>Featured SaaS Listings</h2>
+            <p style="font-size: 12px; color: #cf0505; text-align: center;">This is a sponsored section</p>
             <div class="listings-grid">
                 <!-- Listing cards will be dynamically populated via JavaScript -->
+                 
             </div>
         </section>
 
@@ -76,23 +121,43 @@
             </div>
         </section>
 
-        <section id="how-it-works">
-            <h2>How It Works</h2>
-            <div class="steps">
-                <div class="step">
-                    <i class="fas fa-list-alt"></i>
+        <section class="platform-process">
+            <div class="process-header">
+                <h2>Simple SaaS Marketplace</h2>
+                <p>List your SaaS, connect with buyers on X/Twitter, and close deals your way</p>
+            </div>
+            
+            <div class="process-grid">
+                <div class="process-card">
+                    <div class="card-icon">
+                        <i class="fas fa-list"></i>
+                    </div>
                     <h3>List Your SaaS</h3>
-                    <p>Create a detailed listing with metrics, financials, and growth potential.</p>
+                    <p>Create a detailed listing showcasing your SaaS business metrics, features, and potential</p>
                 </div>
-                <div class="step">
-                    <i class="fas fa-users"></i>
-                    <h3>Connect with Buyers</h3>
-                    <p>Get matched with verified buyers interested in your business.</p>
+
+                <div class="process-card">
+                    <div class="card-icon">
+                        <i class="fab fa-twitter"></i>
+                    </div>
+                    <h3>Connect on X/Twitter</h3>
+                    <p>Buyers will reach out directly through X/Twitter to discuss your listing and negotiate terms</p>
                 </div>
-                <div class="step">
-                    <i class="fas fa-handshake"></i>
-                    <h3>Close the Deal</h3>
-                    <p>Finalize the sale with our secure transaction process.</p>
+
+                <div class="process-card">
+                    <div class="card-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Close Your Deal</h3>
+                    <p>Handle payments and transfers directly with the buyer using your preferred method</p>
+                </div>
+
+                <div class="process-card">
+                    <div class="card-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3>Notify Us</h3>
+                    <p>Once sold, message @AdongoJakes on X/Twitter to remove your listing from the marketplace</p>
                 </div>
             </div>
         </section>
@@ -118,10 +183,17 @@
             </div>
             <div class="footer-section">
                 <h4>Contact</h4>
-                <a href="adongojakes@gmail.com">JakesAdongo</a>
+                <a href="mailto:adongojakes@gmail.com">
+                    <i class="far fa-envelope"></i>
+                    adongojakes@gmail.com
+                </a>
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://twitter.com/AdongoJakes" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/your_linkedin" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -186,5 +258,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script type="module" src="script.js"></script>
+    <script type="module" src="home-feature.js"></script>
 </body>
 </html>

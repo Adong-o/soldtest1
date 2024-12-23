@@ -25,4 +25,9 @@ export const numberUtils = {
     formatPercentage: (value) => {
         return `${value}%`;
     }
-}; 
+};
+
+// Update any navigation functions to include .html
+function navigateToMarketplace() {
+    window.location.href = './marketplace.html';
+} 

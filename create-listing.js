@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Redirect after 3 seconds
             setTimeout(() => {
-                window.location.href = '/dashboard';
+                window.location.href = './dashboard.html';
             }, 3000);
             
             return;

@@ -358,9 +358,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     timestamp: serverTimestamp()
                 });
 
-                // Delete user account
+                // Delete user account will have to confirm this again
                 await deleteUser(auth.currentUser);
-                window.location.href = '/';
+                window.location.href = './index.html';
             } catch (error) {
                 console.error('Error:', error);
                 showNotification('Error deleting account. Please try again.', 'error');
@@ -411,7 +411,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Redirect to index.html
-            window.location.href = '/';
+            window.location.href = './index.html';
         } catch (error) {
             console.error('Error:', error);
             alert('An error occurred. Please try again.');
@@ -425,7 +425,7 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             try {
                 await signOut(auth);
-                window.location.href = '/';
+                window.location.href = './index.html';
             } catch (error) {
                 console.error('Logout error:', error);
                 showNotification('Error logging out. Please try again.', 'error');
@@ -513,7 +513,7 @@ document.addEventListener('DOMContentLoaded', () => {
         createListingBtn.addEventListener('click', () => {
             const user = auth.currentUser;
             if (user?.emailVerified) {
-                window.location.href = '/create-listing';
+                window.location.href = './create-listing.html';
             } else {
                 const warning = document.createElement('div');
                 warning.className = 'notification error';
@@ -620,7 +620,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="empty-state">
                         <i class="fas fa-clipboard-list"></i>
                         <p>No listings yet</p>
-                        <a href="/create-listing" class="btn-primary">Create Your First Listing</a>
+                        <a href="./create-listing.html" class="btn-primary">Create Your First Listing</a>
                     </div>
                 `;
                 return;
@@ -670,7 +670,7 @@ document.addEventListener('DOMContentLoaded', () => {
             listingsContainer.innerHTML = `
                 <div class="error-state">
                     <i class="fas fa-exclamation-circle"></i>
-                    <p>Error loading listings. Please try again.</p>
+                    <p>Error loading listings. Try again later.</p>
                 </div>
             `;
         }
@@ -791,7 +791,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="empty-state">
                         <i class="fas fa-clipboard-list"></i>
                         <p>No listings found</p>
-                        <button onclick="window.location.href='/create-listing'" class="btn-primary">
+                        <button onclick="window.location.href='./create-listing.html'" class="btn-primary">
                             Create Your First Listing
                         </button>
                     </div>
@@ -890,7 +890,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Edit and Delete functions
     async function editListing(listingId) {
         // Redirect to edit page with listing ID
-        window.location.href = `/edit-listing.html?id=${listingId}`;
+        window.location.href = `./edit-listing.html?id=${listingId}`;
     }
 
     async function deleteListing(listingId) {
@@ -1074,7 +1074,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="empty-state">
                         <i class="fas fa-clipboard-list"></i>
                         <p>No listings yet</p>
-                        <a href="/create-listing" class="btn-primary">Create Your First Listing</a>
+                        <a href="./create-listing.html" class="btn-primary">Create Your First Listing</a>
                     </div>
                 `;
                 return;

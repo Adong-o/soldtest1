@@ -272,8 +272,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const techStackHidden = document.getElementById('techStack');
         if (techStackHidden) {
             techStackHidden.value = Array.from(selectedTechs).join(',');
-        } else {
-            console.error('Tech stack hidden input not found');
+            console.log('Updated tech stack:', techStackHidden.value); // Debug log
         }
     }
 
@@ -454,8 +453,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 payingCustomers: Number(document.getElementById('payingCustomers').value),
                 
                 // Tech Stack & Features
-                techStack: Array.from(document.querySelectorAll('input[name="tech"]:checked'))
-                    .map(cb => cb.value),
+                //techStack: Array.from(document.querySelectorAll('input[name="tech"]:checked'))
+                //.map(cb => cb.value),
+                techStack: document.getElementById('techStack').value.split(',').filter(Boolean),
                 features: document.getElementById('features').value,
                 platforms: Array.from(document.querySelectorAll('input[name="platforms"]:checked'))
                     .map(cb => cb.value),
@@ -464,7 +464,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     .map(cb => cb.value),
                 reasonForSale: document.getElementById('reasonForSale').value,
                 assetsIncluded: Array.from(document.querySelectorAll('input[name="assets"]:checked'))
-                    .map(cb => cb.value),
+                //.map(cb => cb.value), done this to see if it save
+                    .map(checkbox => checkbox.value),
                 
                 // Contact info
                 twitterUrl: cleanTwitterUrl(document.getElementById('twitterUrl')?.value?.trim() || ''),
@@ -496,7 +497,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Redirect after delay
             setTimeout(() => {
-                window.location.href = '/dashboard.html';
+                window.location.href = './dashboard.html';
             }, 2000);
 
         } catch (error) {
@@ -611,4 +612,9 @@ document.addEventListener('DOMContentLoaded', () => {
             label.classList.toggle('active'); // Toggle active class
         });
     });
+
+    // Add this debug log in your form submission - whole this for debugging
+    console.log('Tech Stack:', document.getElementById('techStack').value);
+    console.log('Assets:', Array.from(document.querySelectorAll('input[name="assets"]:checked'))
+        .map(checkbox => checkbox.value));
 }); 

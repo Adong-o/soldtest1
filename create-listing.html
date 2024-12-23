@@ -359,7 +359,7 @@
                     <div class="form-group">
                         <label>Assets Included in Sale</label>
                         <div class="checkbox-group">
-                            <div class="checkbox-label" data-value="codebase">
+                            <!-- <div class="checkbox-label" data-value="codebase">
                                 <span class="checkbox-indicator"></span>
                                 <span>Source Code</span>
                             </div>
@@ -374,7 +374,23 @@
                             <div class="checkbox-label" data-value="branding">
                                 <span class="checkbox-indicator"></span>
                                 <span>Brand Assets</span>
-                            </div>
+                            </div> --- this was the old code for the assets -- -->
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="assets" value="codebase">
+                                Source Code
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="assets" value="domain">
+                                Domain Name
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="assets" value="customers">
+                                Customer Database
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="assets" value="branding">
+                                Brand Assets
+                            </label>
                         </div>
                     </div>
                     <div class="form-group">

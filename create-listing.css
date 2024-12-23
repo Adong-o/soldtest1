@@ -328,27 +328,90 @@
 .checkbox-group {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem; /* Space between checkboxes */
+    gap: 1rem;
+    margin-top: 0.5rem;
 }
 
 .checkbox-label {
     display: flex;
-    align-items: center; /* Align checkbox and label */
-    cursor: pointer; /* Change cursor on hover */
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
 }
 
+.checkbox-label:hover {
+    background-color: #f3f4f6;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin: 0;
+    cursor: pointer;
+    border: 2px solid #d1d5db;
+    border-radius: 0.25rem;
+    transition: all 0.2s;
+}
+
+.checkbox-label input[type="checkbox"]:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* Platform availability section specific styles */
+.platform-options .checkbox-label,
+.marketing-channels .checkbox-label,
+.assets-included .checkbox-label {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+    background-color: white;
+}
+
+.platform-options .checkbox-label:hover,
+.marketing-channels .checkbox-label:hover,
+.assets-included .checkbox-label:hover {
+    background-color: #f9fafb;
+    border-color: #d1d5db;
+}
+
+/* Remove old checkbox-indicator styles */
 .checkbox-indicator {
-    width: 20px;
-    height: 20px;
-    border: 2px solid #e5e7eb;
-    border-radius: 4px; /* Rounded corners */
-    margin-right: 0.5rem; /* Space between indicator and label */
-    transition: background-color 0.2s, border-color 0.2s;
+    display: none;
 }
 
-.checkbox-label.active .checkbox-indicator {
-    background-color: #2196F3; /* Active color */
-    border-color: #2196F3; /* Change border color when active */
+/* Add spacing between sections */
+.form-group + .form-group {
+    margin-top: 1.5rem;
+}
+
+/* Make the checkbox text more visible */
+.checkbox-label span {
+    color: #374151;
+    font-size: 0.9375rem;
+    font-weight: 500;
+}
+
+/* Terms and conditions checkbox specific style */
+.terms-section .checkbox-label {
+    margin-top: 1rem;
+    padding: 0;
+    border: none;
+}
+
+.terms-section .checkbox-label:hover {
+    background-color: transparent;
+}
+
+/* Ensure consistent spacing in all checkbox groups */
+.checkbox-group .checkbox-label:last-child {
+    margin-bottom: 0;
 }
 
 /* Terms and conditions styles */

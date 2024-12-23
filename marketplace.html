@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoldSaaS Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="marketplace.css">
+    <link rel="icon" href="./icon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="./icon.svg" alt="SoldSaaS Logo">
+                <h1>SoldSaaS</h1>
+            </div>
+            <div class="nav-links">
+                <a href="./dashboard.html" class="btn-secondary">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Dashboard
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="marketplace-main">
+        <div class="marketplace-header">
+            <h1>SaaS Marketplace</h1>
+            <p>Discover and acquire promising SaaS businesses</p>
+        </div>
+
+        <div class="marketplace-content">
+            <!-- Filters Sidebar -->
+            <aside class="filters-sidebar">
+                <div class="filters-section">
+                    <h3>Filters</h3>
+                    
+                    <div class="filter-group">
+                        <label>Industry</label>
+                        <select id="industryFilter">
+                            <option value="">All Industries</option>
+                            <option value="marketing">Marketing</option>
+                            <option value="productivity">Productivity</option>
+                            <option value="ecommerce">E-commerce</option>
+                            <option value="finance">Finance</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Price Range</label>
+                        <select id="priceFilter">
+                            <option value="">Any Price</option>
+                            <option value="0-50000">Under $50k</option>
+                            <option value="50000-200000">$50k - $200k</option>
+                            <option value="200000-1000000">$200k - $1M</option>
+                            <option value="1000000+">$1M+</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Monthly Revenue</label>
+                        <select id="mrrFilter">
+                            <option value="">Any MRR</option>
+                            <option value="0-5000">Under $5k</option>
+                            <option value="5000-20000">$5k - $20k</option>
+                            <option value="20000-100000">$20k - $100k</option>
+                            <option value="100000+">$100k+</option>
+                        </select>
+                    </div>
+
+                    <button id="clearFilters" class="clear-filters-btn">
+                        <i class="fas fa-undo"></i>
+                        Clear Filters
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Listings Grid -->
+            <div class="listings-container">
+                <div id="listingsGrid" class="listings-grid">
+                    <!-- Listings will be populated here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script type="module" src="marketplace.js"></script>
+</body>
+</html> 

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages - SoldSaaS</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="messages.css">
+    <link rel="icon" href="./icon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="./icon.svg" alt="SoldSaaS Logo">
+                <h1>SoldSaaS</h1>
+            </div>
+            <div class="nav-links">
+                <a href="/dashboard">Dashboard</a>
+                <a href="/marketplace">Marketplace</a>
+                <a href="/messages" class="active">Messages</a>
+                <div class="profile-icon" id="profileIcon">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="messages-main">
+        <div class="messages-container">
+            <div class="conversations-list">
+                <div class="conversations-header">
+                    <h2>Messages</h2>
+                    <div class="conversation-search">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search conversations...">
+                    </div>
+                </div>
+                <div id="conversationsList">
+                    <!-- Conversations will be loaded here -->
+                </div>
+            </div>
+
+            <div class="chat-container">
+                <div id="emptyState" class="chat-empty-state">
+                    <i class="fas fa-comments"></i>
+                    <h3>Select a conversation</h3>
+                    <p>Choose a conversation from the list to start messaging</p>
+                </div>
+
+                <div id="chatContent" class="chat-content" style="display: none;">
+                    <div class="chat-header">
+                        <div class="chat-info">
+                            <h3 id="chatTitle">Loading...</h3>
+                            <span id="listingInfo">Loading...</span>
+                        </div>
+                        <button class="view-listing-btn" id="viewListingBtn">
+                            <i class="fas fa-external-link-alt"></i>
+                            View Listing
+                        </button>
+                    </div>
+
+                    <div class="messages-list" id="messagesList">
+                        <!-- Messages will be loaded here -->
+                    </div>
+
+                    <div class="message-input">
+                        <textarea 
+                            id="messageInput" 
+                            placeholder="Type your message..."
+                            rows="1"
+                        ></textarea>
+                        <button id="sendMessage">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script type="module" src="messages.js"></script>
+</body>
+</html> 

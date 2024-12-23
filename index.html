@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoldSaaS - Buy and Sell SaaS Businesses</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="./icon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script type="module" src="https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js"></script>
+    <script type="text/javascript">
+      // Single Page Apps for GitHub Pages
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) { 
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location))
+    </script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="./icon.svg" alt="SoldSaaS Logo">
+                <h1>SoldSaaS</h1>
+            </div>
+            <div class="nav-links">
+                <button class="btn-primary" id="joinButton">Join now</button>
+                <button class="btn-secondary" id="listButton">List Your SaaS</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>List Your SaaS Where Top Buyers Are Looking</h1>
+            <p>Join the leading marketplace for SaaS acquisitions. Get your business in front of serious buyers and maximize your exit value.</p>
+            <div class="hero-buttons">
+                <button class="btn-primary" id="heroJoinButton">List Your SaaS</button>
+                <button class="btn-secondary">View Recent Exits</button>
+            </div>
+        </section>
+
+        <section id="listings" class="featured-listings">
+            <h2>Featured SaaS Listings</h2>
+            <div class="listings-grid">
+                <!-- Listing cards will be dynamically populated via JavaScript -->
+            </div>
+        </section>
+
+        <section class="benefits">
+            <h2>Why List Your SaaS With Us</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Verified Buyers</h3>
+                    <p>Connect with pre-vetted buyers who are serious about acquiring quality SaaS businesses.</p>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Maximum Value</h3>
+                    <p>Our valuation experts help you position your SaaS for the best possible exit price.</p>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-lock"></i>
+                    <h3>Secure Process</h3>
+                    <p>End-to-end transaction security with confidential listing options and secure data rooms.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="how-it-works">
+            <h2>How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <i class="fas fa-list-alt"></i>
+                    <h3>List Your SaaS</h3>
+                    <p>Create a detailed listing with metrics, financials, and growth potential.</p>
+                </div>
+                <div class="step">
+                    <i class="fas fa-users"></i>
+                    <h3>Connect with Buyers</h3>
+                    <p>Get matched with verified buyers interested in your business.</p>
+                </div>
+                <div class="step">
+                    <i class="fas fa-handshake"></i>
+                    <h3>Close the Deal</h3>
+                    <p>Finalize the sale with our secure transaction process.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>SoldSaaS</h3>
+                <p>The premier marketplace for buying and selling SaaS businesses.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="#listings">Browse Listings</a>
+                <a href="#sell">Sell Your SaaS</a>
+                <a href="/about-us">About Us</a>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <a href="#blog">Blog</a>
+                <a href="#guides">Guides</a>
+                <a href="#faq">FAQ</a>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <a href="adongojakes@gmail.com">JakesAdongo</a>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 SoldSaaS. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Authentication Modal -->
+    <div class="modal" id="authModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login">Login</button>
+                <button class="auth-tab" data-tab="signup">Sign Up</button>
+            </div>
+            
+            <form id="loginForm" class="auth-form active">
+                <h2>Welcome Back</h2>
+                <button type="button" id="loginGoogleBtn" class="google-auth-btn">
+                    <i class="fab fa-google"></i>
+                    Continue with Google
+                </button>
+                <div class="divider">or</div>
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                </div>
+                <div class="forgot-password">
+                    <a href="#" id="forgotPasswordLink">Forgot Password?</a>
+                </div>
+                <button type="submit" class="btn-primary">Login</button>
+            </form>
+
+            <form id="signupForm" class="auth-form">
+                <h2>Create Account</h2>
+                <button type="button" id="signupGoogleBtn" class="google-auth-btn">
+                    <i class="fab fa-google"></i>
+                    Continue with Google
+                </button>
+                <div class="divider">or</div>
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" required placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" required placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" required placeholder="Choose a password">
+                </div>
+                <button type="submit" class="btn-primary">Sign Up</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>

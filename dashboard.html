@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoldSaaS - Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="./icon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script type="module" src="https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js"></script>
+    <link rel="stylesheet" href="listings-modal.css">
+</head>
+<body class="dashboard-body">
+    <header class="dashboard-header">
+        <nav class="dashboard-nav">
+            <div class="nav-left">
+                <div class="logo">
+                    <img src="./icon.svg" alt="SoldSaaS Logo">
+                    <span>SoldSaaS</span>
+                </div>
+                
+            </div>
+            <div class="nav-right">
+                <div class="user-profile-dropdown">
+                    <div class="profile-icon">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-card">
+                            <div class="user-info">
+                                <i class="fas fa-user-circle profile-placeholder"></i>
+                                <div>
+                                    <h4 id="dropdownUserName">User Name</h4>
+                                    <p id="dropdownUserEmail">user@example.com</p>
+                                </div>
+                            </div>
+                            <div class="dropdown-actions">
+                                <a href="#" id="settingsLink">
+                                    <i class="fas fa-cog"></i> Account Settings
+                                </a>
+                                <a href="#" id="logoutButton">
+                                    <i class="fas fa-sign-out-alt"></i> Log Out
+                                </a>
+                                <a href="#" id="deleteAccountButton" class="delete-account">
+                                    <i class="fas fa-trash-alt"></i> Delete Account
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Add this right after the header for the verification warning -->
+    <div id="verificationWarning" class="verification-warning" style="display: none;">
+        <i class="fas fa-exclamation-circle"></i>
+        Verify email and come back to refresh.
+    </div>
+
+    <main class="dashboard-main">
+        <div class="dashboard-wrapper">
+            <!-- Welcome Section -->
+            <section class="welcome-section">
+                <div class="welcome-content">
+                    <h1>Welcome back, <span id="welcomeUserName">Entrepreneur</span></h1>
+                    <p>Here's an overview of your marketplace activity</p>
+                </div>
+            </section>
+
+            <!-- Stats Overview -->
+            <section class="stats-overview">
+                <div class="stat-card clickable">
+                    <div class="stat-header">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Total Listings</h3>
+                    </div>
+                    <div class="stat-value" id="totalListings">0</div>
+                    <div class="stat-footer">
+                        <span>Active listings on marketplace</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <i class="fas fa-dollar-sign"></i>
+                        <h3>Revenue</h3>
+                    </div>
+                    <div class="stat-value" id="potentialRevenue">$0</div>
+                    <div class="stat-footer">
+                        <span>Total potential value</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <i class="fas fa-eye"></i>
+                        <h3>Views</h3>
+                    </div>
+                    <div class="stat-value">0</div>
+                    <div class="stat-footer">
+                        <span>Profile visits this month</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <i class="fas fa-bookmark"></i>
+                        <h3>Saved Listings</h3>
+                    </div>
+                    <div class="stat-value" id="savedListingsCount">0</div>
+                    <div class="stat-footer">
+                        <span>Items in your watchlist</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Main Dashboard Grid -->
+            <div class="dashboard-grid">
+                <!-- Quick Actions Section -->
+                <section class="quick-actions-section">
+                    <div class="section-card">
+                        <div class="card-header">
+                            <h2>Quick Actions</h2>
+                        </div>
+                        <div class="action-buttons">
+                            <a href="/create-listing" class="action-btn primary">
+                                <i class="fas fa-plus"></i>
+                                <span>Create New Listing</span>
+                            </a>
+                            <button class="action-btn secondary" onclick="window.location.href='/marketplace'">
+                                <i class="fas fa-store"></i>
+                                <span>Browse Marketplace</span>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Recent Activity Section -->
+                <section class="activity-section">
+                    <div class="section-card">
+                        <div class="card-header">
+                            <h2>Recent Users</h2>
+                        </div>
+                        <div class="users-list" id="recentUsersList">
+                            <!-- Users will be populated here -->
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- My Listings Section -->
+            <section class="my-listings-section">
+                <div class="section-card">
+                    <div class="card-header">
+                        <h2>My Listings</h2>
+                    </div>
+                    <div id="myListingsGrid" class="my-listings-grid">
+                        <!-- Listings will be populated here -->
+                    </div>
+                </div>
+            </section>
+
+                         
+        </div>
+    </main>
+
+       
+
+    <!-- Settings Modal -->
+    <div class="modal" id="settingsModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Account Settings</h2>
+            <form id="settingsForm">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="settingsEmail" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Change Password</label>
+                    <input type="password" id="newPassword" placeholder="New Password">
+                </div>
+                <button type="submit" class="btn-primary">Update Settings</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="feedbackModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 id="feedbackTitle">Before Deleting Your Account</h2>
+            <p>We're sorry to see you go. Please let us know why you're deleting your account:</p>
+            <form id="feedbackForm">
+                <div class="feedback-options">
+                    <div class="feedback-option">
+                        <input type="radio" id="reason1" name="feedback" value="found_alternative">
+                        <label for="reason1">Found a better alternative</label>
+                    </div>
+                    <div class="feedback-option">
+                        <input type="radio" id="reason2" name="feedback" value="not_useful">
+                        <label for="reason2">Not useful for my needs</label>
+                    </div>
+                    <div class="feedback-option">
+                        <input type="radio" id="reason3" name="feedback" value="technical_issues">
+                        <label for="reason3">Technical issues</label>
+                    </div>
+                    <div class="feedback-option">
+                        <input type="radio" id="reason4" name="feedback" value="privacy_concerns">
+                        <label for="reason4">Privacy concerns</label>
+                    </div>
+                    <div class="feedback-option">
+                        <input type="radio" id="reason5" name="feedback" value="other">
+                        <label for="reason5">Other</label>
+                    </div>
+                    <div class="other-reason" style="display: none;">
+                        <textarea id="otherReason" placeholder="Please specify your reason..."></textarea>
+                    </div>
+                </div>
+                <div class="feedback-actions">
+                    <button type="button" class="btn-secondary" onclick="this.closest('.modal').style.display='none'">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn-danger">
+                        Delete Account
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="dashboard.js"></script>
+</body>
+</html> 

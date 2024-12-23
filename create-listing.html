@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Listing - SoldSaaS</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="create-listing.css">
+    <link rel="icon" href="./icon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="dashboard-header">
+        <nav class="dashboard-nav">
+            <div class="nav-left">
+                <a href="/dashboard" class="back-link">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Dashboard
+                </a>
+            </div>
+            <div class="nav-center">
+                <h1>Create New Listing</h1>
+            </div>
+            <div class="nav-right"></div>
+        </nav>
+    </header>
+
+    <main class="create-listing-main">
+        <form id="createListingForm" class="listing-form">
+            <!-- Progress Bar -->
+            <div class="form-progress">
+                <div class="progress-step active" data-step="1">
+                    <i class="fas fa-building"></i>
+                    <span>Business Overview</span>
+                </div>
+                <div class="progress-step" data-step="2">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Financials</span>
+                </div>
+                <div class="progress-step" data-step="3">
+                    <i class="fas fa-code"></i>
+                    <span>Product Details</span>
+                </div>
+                <div class="progress-step" data-step="4">
+                    <i class="fas fa-users"></i>
+                    <span>Users & Marketing</span>
+                </div>
+                <div class="progress-step" data-step="5">
+                    <i class="fas fa-file-contract"></i>
+                    <span>Assets & Legal</span>
+                </div>
+            </div>
+
+            <!-- Form Sections -->
+            <div class="form-sections">
+                <!-- Business Overview -->
+                <section class="form-section active" data-section="1">
+                    <h2>Business Overview</h2>
+                    <div class="form-group">
+                        <label for="businessName">Business Name </label>
+                        <input type="text" id="businessName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="businessType">Business Type</label>
+                        <select id="businessType" required>
+                            <option value="">Select Business Type</option>
+                            <option value="saas">SaaS (Software as a Service)</option>
+                            <option value="mobile_app">Mobile App</option>
+                            <option value="content">Content Platform</option>
+                            <option value="shopify">Shopify App</option>
+                            <option value="agency">Agency</option>
+                            <option value="ecommerce">E-commerce</option>
+                            <option value="marketplace">Marketplace</option>
+                            <option value="mainstreet">Main Street Business</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Detailed Description </label>
+                        <textarea id="description" rows="6" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="industry">Industry/Category </label>
+                        <select id="industry" required>
+                            <option value="">Select Industry</option>
+                            <option value="marketing">Marketing</option>
+                            <option value="fintech">Fintech</option>
+                            <option value="healthcare">Healthcare</option>
+                            <option value="ecommerce">E-commerce</option>
+                            <option value="productivity">Productivity</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="businessModel">Business Model </label>
+                        <select id="businessModel" required>
+                            <option value="">Select Model</option>
+                            <option value="subscription">Subscription-based</option>
+                            <option value="freemium">Freemium</option>
+                            <option value="payPerUse">Pay-per-use</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="websiteUrl">Website URL</label>
+                        <div class="url-input-group">
+                            <input type="url" id="websiteUrl" required 
+                                placeholder="Link to be exact - https://yoursaas.com"
+                                pattern="https?://.+"
+                                title="Include http:// or https:// in your URL">
+                            <button type="button" class="btn-verify-url">
+                                <i class="fas fa-link"></i>
+                                Verify
+                            </button>
+                        </div>
+                        <small class="helper-text">Enter your SaaS product's live website URL</small>
+                    </div>
+                </section>
+
+                <!-- Financial Details -->
+                <section class="form-section" data-section="2">
+                    <h2>Financial Details</h2>
+                    <div class="metrics-grid">
+                        <div class="form-group">
+                            <label for="mrr">Monthly Recurring Revenue (MRR)</label>
+                            <div class="input-with-prefix">
+                                <span class="prefix">$</span>
+                                <input type="number" id="mrr" required 
+                                    placeholder="Total monthly revenue from subscriptions"
+                                    title="Total revenue you receive each month from all paying customers combined">
+                            </div>
+                            <small class="helper-text">Example: If you have 100 customers paying $50/month = $5,000 MRR</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="arr">Annual Run Rate (ARR)</label>
+                            <div class="input-with-prefix">
+                                <span class="prefix">$</span>
+                                <input type="number" id="arr" required 
+                                    placeholder="MRR × 12"
+                                    title="Your annual revenue run rate (MRR multiplied by 12)">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="grossMargin">Gross Margin</label>
+                            <div class="input-with-suffix">
+                                <input type="number" id="grossMargin" required 
+                                    placeholder="Profit after direct costs"
+                                    title="Percentage of revenue left after direct costs">
+                                <span class="suffix">%</span>
+                            </div>
+                            <small class="helper-text">Revenue minus direct costs (hosting, payment fees) divided by revenue. Typical SaaS margins: 70-90%</small>
+                        </div>
+                    </div>
+
+                    <div class="metrics-grid">
+                        <div class="form-group">
+                            <label for="netProfit">Monthly Net Profit</label>
+                            <div class="input-with-prefix">
+                                <span class="prefix">$</span>
+                                <input type="number" id="netProfit" required 
+                                    placeholder="Profit after all expenses"
+                                    title="Monthly revenue minus all expenses (hosting, salaries, marketing, etc.)">
+                            </div>
+                            <small class="helper-text">Total revenue minus ALL expenses including salaries, marketing, tools, etc.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="growthRate">Month-over-Month Growth Rate</label>
+                            <div class="input-with-suffix">
+                                <input type="number" id="growthRate" required 
+                                    placeholder="Monthly growth percentage"
+                                    title="Average percentage growth in revenue each month">
+                                <span class="suffix">%</span>
+                            </div>
+                            <small class="helper-text">Example: If MRR grew from $10K to $11K last month = 10% growth</small>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Product Details -->
+                <section class="form-section" data-section="3">
+                    <h2>Product Details</h2>
+                    <div class="form-group">
+                        <label>Tech Stack</label>
+                        <div class="tech-stack-select">
+                            <div class="tech-stack-input" tabindex="0">
+                                <!-- Selected tech tags will appear here -->
+                            </div>
+                            <div class="tech-stack-dropdown">
+                                <!-- Tech options will be populated here -->
+                            </div>
+                        </div>
+                        <input type="hidden" id="techStack" name="techStack" required>
+                        <small class="helper-text">Click to select technologies used in your product</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="features">Core Features</label>
+                        <textarea id="features" rows="4" required 
+                            placeholder="• User authentication&#10;• Payment processing&#10;• Analytics dashboard&#10;• API integration"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="productStage">Product Stage</label>
+                        <select id="productStage" required>
+                            <option value="">Select Stage</option>
+                            <option value="beta">Beta</option>
+                            <option value="growth">Growth</option>
+                            <option value="mature">Mature</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Platform Availability</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="platforms" value="web">
+                                Web Application
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="platforms" value="mobile_web">
+                                Mobile Web
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="platforms" value="ios">
+                                iOS App
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="platforms" value="android">
+                                Android App
+                            </label>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Users & Marketing -->
+                <section class="form-section" data-section="4">
+                    <h2>Users & Marketing</h2>
+                    
+                    <!-- Traffic & Analytics -->
+                    <div class="metrics-section">
+                        <h3 class="metrics-section-title">Traffic & Analytics</h3>
+                        <div class="analytics-connect">
+                            <div class="helper-text">
+                                <i class="fas fa-info-circle"></i>
+                                Connecting Google Analytics helps verify your traffic metrics and increases buyer trust
+                            </div>
+                            <button type="button" class="btn-connect-analytics" onclick="connectGoogleAnalytics()">
+                                <i class="fab fa-google"></i>
+                                Connect Google Analytics
+                            </button>
+                            <div id="analyticsAccounts" class="analytics-accounts">
+                                <!-- Analytics accounts will be populated here -->
+                            </div>
+                        </div>
+                        
+                        <div class="metrics-grid">
+                            <div class="form-group">
+                                <label for="monthlyTraffic">Monthly Unique Visitors</label>
+                                <input type="number" id="monthlyTraffic" required 
+                                    placeholder="e.g. 5000"
+                                    title="Number of unique visitors per month">
+                                <small class="helper-text">Average monthly unique visitors over the last 3 months</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="trafficGrowth">Traffic Growth Rate</label>
+                                <div class="input-with-suffix">
+                                    <input type="number" id="trafficGrowth" 
+                                        placeholder="Monthly traffic growth"
+                                        title="Monthly percentage increase in traffic">
+                                    <span class="suffix">%</span>
+                                </div>
+                                <small class="helper-text">Average monthly traffic growth rate</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- User Metrics -->
+                    <div class="metrics-section">
+                        <h3 class="metrics-section-title">User Metrics</h3>
+                        <div class="metrics-grid">
+                            <div class="form-group">
+                                <label for="activeUsers">Monthly Active Users</label>
+                                <div class="input-with-suffix">
+                                    <input type="number" id="activeUsers" required placeholder="Users who engage monthly">
+                                    <span class="suffix">Users</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="payingCustomers">Paying Customers</label>
+                                <div class="input-with-suffix">
+                                    <input type="number" id="payingCustomers" required placeholder="Current paying users">
+                                    <span class="suffix">Customers</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Customer Segments -->
+                    <div class="metrics-section">
+                        <h3 class="metrics-section-title">Social Media</h3>
+                        <div class="form-group">
+                            <label for="twitterUrl">Twitter/X Profile URL</label>
+                            <div class="input-with-icon">
+                                <i class="fab fa-twitter"></i>
+                                <input type="url" id="twitterUrl" 
+                                    placeholder="https://twitter.com/yourusername"
+                                    pattern="https?://.*" 
+                                    title="Include http:// or https://">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Acquisition Channels -->
+                    <div class="metrics-section">
+                        <h3 class="metrics-section-title">Marketing Channels</h3>
+                        <div class="form-group">
+                            <label>Primary Acquisition Channels</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="channels" value="seo">
+                                    Organic Search (SEO)
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="channels" value="ppc">
+                                    Paid Advertising
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="channels" value="social">
+                                    Social Media
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="channels" value="content">
+                                    Content Marketing
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="channels" value="referral">
+                                    Referral/Word of Mouth
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="channels" value="partnerships">
+                                    Partnerships/Integrations
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Assets & Legal -->
+                <section class="form-section" data-section="5">
+                    <h2>Assets & Legal</h2>
+                    <div class="form-group">
+                        <label for="askingPrice">Asking Price</label>
+                        <div class="input-with-prefix">
+                            <span class="prefix">$</span>
+                            <input type="number" id="askingPrice" placeholder="e.g. 500000" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="reasonForSale">Reason for Sale </label>
+                        <textarea id="reasonForSale" rows="3" required placeholder="Explain why you're selling the business"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Assets Included in Sale</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-label" data-value="codebase">
+                                <span class="checkbox-indicator"></span>
+                                <span>Source Code</span>
+                            </div>
+                            <div class="checkbox-label" data-value="domain">
+                                <span class="checkbox-indicator"></span>
+                                <span>Domain Name</span>
+                            </div>
+                            <div class="checkbox-label" data-value="customers">
+                                <span class="checkbox-indicator"></span>
+                                <span>Customer Database</span>
+                            </div>
+                            <div class="checkbox-label" data-value="branding">
+                                <span class="checkbox-indicator"></span>
+                                <span>Brand Assets</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="established">Year Established </label>
+                        <input type="number" id="established" required placeholder="e.g. 2021">
+                    </div>
+                    
+                    <div class="form-group terms-section">
+                        <h3>Terms & Conditions</h3>
+                        <div class="terms-box">
+                            <p>By listing your SaaS on our platform, you agree to:</p>
+                            <ul>
+                                <li>Pay a 5% success fee upon successful sale of your business</li>
+                                <li>Provide accurate information about your business</li>
+                                <li>Communicate promptly with potential buyers</li>
+                                <li>Report the sale details accurately when completed</li>
+                            </ul>
+                        </div>
+                        <label class="checkbox-label required">
+                            <input type="checkbox" id="termsAccepted" required>
+                            I accept the terms and conditions, including the 5% success fee
+                        </label>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="form-navigation">
+                <button type="button" class="btn-secondary prev-step" style="display: none;">Previous</button>
+                <button type="button" class="btn-primary next-step">Next</button>
+                <button type="submit" class="btn-primary submit-listing" style="display: none;">Submit Listing</button>
+            </div>
+        </form>
+    </main>
+
+    <script type="module" src="create-listing.js"></script>
+</body>
+</html> 

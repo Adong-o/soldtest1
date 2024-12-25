@@ -4,7 +4,8 @@ import {
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
     GoogleAuthProvider,
-    signInWithPopup 
+    signInWithPopup,
+    sendEmailVerification
 } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 
 // Firebase configuration
@@ -98,13 +99,24 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
             try {
-                await signInWithEmailAndPassword(auth, email, password);
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+
+                // Check if email is verified
+                if (!user.emailVerified) {
+                    // Send another verification email
+                    await sendEmailVerification(user);
+                    if (errorElement) {
+                        errorElement.textContent = 'Please verify your email first. A new verification email has been sent.';
+                    }
+                    return;
+                }
+
+                // If email is verified, proceed to dashboard
                 window.location.href = './dashboard.html';
             } catch (error) {
                 if (errorElement) {
                     errorElement.textContent = getErrorMessage(error.code);
-                } else {
-                    console.error('Error element not found:', error);
                 }
             }
         });
@@ -126,13 +138,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const passwordInput = document.getElementById('signupPassword');
             const errorElement = signupForm.querySelector('.error-message');
             
-            // Debug log the elements
-            console.log('Form elements found:', {
-                emailInput: !!emailInput,
-                passwordInput: !!passwordInput,
-                errorElement: !!errorElement
-            });
-
             // Validate form elements exist
             if (!emailInput || !passwordInput) {
                 console.error('Form elements missing:', {
@@ -157,13 +162,31 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             try {
-                await createUserWithEmailAndPassword(auth, email, password);
-                window.location.href = './dashboard.html';
+                // Create the user
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+
+                // Send verification email
+                try {
+                    await sendEmailVerification(user);
+                    if (errorElement) {
+                        errorElement.style.color = '#059669'; // Green color for success
+                        errorElement.textContent = 'Verification email sent! Please check your inbox.';
+                    }
+                    // Wait for 2 seconds before redirecting to allow user to read the message
+                    setTimeout(() => {
+                        window.location.href = './dashboard.html';
+                    }, 2000);
+                } catch (verificationError) {
+                    console.error('Error sending verification email:', verificationError);
+                    if (errorElement) {
+                        errorElement.textContent = 'Account created but could not send verification email. Please try again later.';
+                    }
+                }
             } catch (error) {
+                console.error('Signup error:', error);
                 if (errorElement) {
                     errorElement.textContent = getErrorMessage(error.code);
-                } else {
-                    console.error('Error element not found:', error);
                 }
             }
         });

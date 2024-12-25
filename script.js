@@ -39,6 +39,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (button) {
             button.addEventListener('click', () => {
                 authModal.style.display = 'block';
+                console.log('Modal displayed, form available:', {
+                    signupForm: !!document.getElementById('signupForm'),
+                    signupEmail: !!document.getElementById('signupEmail'),
+                    signupPassword: !!document.getElementById('signupPassword')
+                });
             });
         }
     });
@@ -66,29 +71,88 @@ document.addEventListener('DOMContentLoaded', () => {
     if (loginForm) {
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const email = loginForm.querySelector('#loginEmail').value;
-            const password = loginForm.querySelector('#loginPassword').value;
+            
+            // Get form elements
+            const emailInput = loginForm.querySelector('#loginEmail');
+            const passwordInput = loginForm.querySelector('#loginPassword');
+            const errorElement = loginForm.querySelector('.error-message');
+            
+            // Validate form elements exist
+            if (!emailInput || !passwordInput) {
+                console.error('Login form elements not found');
+                if (errorElement) {
+                    errorElement.textContent = 'Form error: Please refresh the page and try again';
+                }
+                return;
+            }
+
+            // Validate input values
+            const email = emailInput.value.trim();
+            const password = passwordInput.value.trim();
+
+            if (!email || !password) {
+                if (errorElement) {
+                    errorElement.textContent = 'Please fill in all fields';
+                }
+                return;
+            }
             
             try {
                 await signInWithEmailAndPassword(auth, email, password);
                 window.location.href = './dashboard.html';
             } catch (error) {
-                const errorElement = loginForm.querySelector('.error-message');
-                errorElement.textContent = getErrorMessage(error.code);
+                if (errorElement) {
+                    errorElement.textContent = getErrorMessage(error.code);
+                } else {
+                    console.error('Error element not found:', error);
+                }
             }
         });
     }
 
     if (signupForm) {
+        console.log('Found signup form:', !!signupForm); // Debug log
+
+        if (!signupForm) {
+            console.error('Signup form not found in DOM');
+            return;
+        }
+
         signupForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const email = signupForm.querySelector('#signupEmail').value;
-            const password = signupForm.querySelector('#signupPassword').value;
-            const confirmPassword = signupForm.querySelector('#confirmPassword').value;
+            
+            // Get form elements with more specific selectors
+            const emailInput = document.getElementById('signupEmail');
+            const passwordInput = document.getElementById('signupPassword');
+            const errorElement = signupForm.querySelector('.error-message');
+            
+            // Debug log the elements
+            console.log('Form elements found:', {
+                emailInput: !!emailInput,
+                passwordInput: !!passwordInput,
+                errorElement: !!errorElement
+            });
 
-            if (password !== confirmPassword) {
-                const errorElement = signupForm.querySelector('.error-message');
-                errorElement.textContent = 'Passwords do not match';
+            // Validate form elements exist
+            if (!emailInput || !passwordInput) {
+                console.error('Form elements missing:', {
+                    emailInput: !!emailInput,
+                    passwordInput: !!passwordInput
+                });
+                if (errorElement) {
+                    errorElement.textContent = 'Form error: Please refresh the page and try again';
+                }
+                return;
+            }
+
+            // Validate input values
+            const email = emailInput.value.trim();
+            const password = passwordInput.value.trim();
+
+            if (!email || !password) {
+                if (errorElement) {
+                    errorElement.textContent = 'Please fill in all fields';
+                }
                 return;
             }
 
@@ -96,8 +160,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 await createUserWithEmailAndPassword(auth, email, password);
                 window.location.href = './dashboard.html';
             } catch (error) {
-                const errorElement = signupForm.querySelector('.error-message');
-                errorElement.textContent = getErrorMessage(error.code);
+                if (errorElement) {
+                    errorElement.textContent = getErrorMessage(error.code);
+                } else {
+                    console.error('Error element not found:', error);
+                }
             }
         });
     }

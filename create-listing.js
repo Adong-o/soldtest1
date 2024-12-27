@@ -298,31 +298,118 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Add Google Analytics connection functionality
-    function connectGoogleAnalytics() {
-        // Simulate loading Google accounts
-        const analyticsAccounts = document.getElementById('analyticsAccounts');
-        analyticsAccounts.style.display = 'block';
-        analyticsAccounts.innerHTML = `
-            <div class="analytics-account-item">
-                <input type="radio" name="analytics_account" id="account1">
-                <div class="account-info">
-                    <div class="account-name">Main Website Analytics</div>
-                    <div class="account-url">yoursaas.com</div>
-                </div>
-            </div>
-            <div class="analytics-account-item">
-                <input type="radio" name="analytics_account" id="account2">
-                <div class="account-info">
-                    <div class="account-name">Blog Analytics</div>
-                    <div class="account-url">blog.yoursaas.com</div>
-                </div>
-            </div>
-        `;
+    // Google Analytics Integration
+    const SCOPES = 'https://www.googleapis.com/auth/analytics.readonly';
+    const CLIENT_ID = 'YOUR_GOOGLE_CLIENT_ID'; // You'll need to replace this with your actual client ID
+
+    // Initialize the Google Analytics API
+    function initGoogleAnalytics() {
+        gapi.load('client:auth2', () => {
+            gapi.client.init({
+                clientId: CLIENT_ID,
+                scope: SCOPES,
+                plugin_name: 'SoldSaaS'
+            }).then(() => {
+                // Check if user is signed in
+                if (!gapi.auth2.getAuthInstance().isSignedIn.get()) {
+                    document.querySelector('.analytics-status').innerHTML = 
+                        '<p class="warning"><i class="fas fa-exclamation-circle"></i> Not connected to Google Analytics</p>';
+                }
+            });
+        });
     }
 
-    // Make the function globally available
-    window.connectGoogleAnalytics = connectGoogleAnalytics;
+    // Handle Google Analytics connection
+    async function connectGoogleAnalytics() {
+        try {
+            // Try to sign in
+            await gapi.auth2.getAuthInstance().signIn();
+            
+            // Get the accounts
+            const response = await gapi.client.analytics.management.accounts.list();
+            const accounts = response.result.items;
+            
+            if (accounts && accounts.length) {
+                // Show accounts selection
+                const accountsContainer = document.getElementById('analyticsAccounts');
+                accountsContainer.innerHTML = `
+                    <div class="analytics-selection">
+                        <h4>Select Analytics Account</h4>
+                        <select id="gaAccountSelect" class="analytics-select">
+                            ${accounts.map(account => 
+                                `<option value="${account.id}">${account.name}</option>`
+                            ).join('')}
+                        </select>
+                        <button onclick="fetchAnalyticsData()" class="btn-fetch-analytics">
+                            <i class="fas fa-sync"></i>
+                            Fetch Data
+                        </button>
+            </div>
+        `;
+                
+                // Show success message
+                document.querySelector('.analytics-status').innerHTML = 
+                    '<p class="success"><i class="fas fa-check-circle"></i> Connected to Google Analytics</p>';
+            }
+        } catch (error) {
+            console.error('Error connecting to Google Analytics:', error);
+            document.querySelector('.analytics-status').innerHTML = 
+                `<p class="error"><i class="fas fa-times-circle"></i> Error: ${error.message}</p>`;
+        }
+    }
+
+    // Fetch Analytics Data
+    async function fetchAnalyticsData() {
+        try {
+            const accountId = document.getElementById('gaAccountSelect').value;
+            
+            // Get the last 30 days of data
+            const thirtyDaysAgo = new Date();
+            thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+            
+            const response = await gapi.client.analytics.data.ga.get({
+                'ids': 'ga:' + accountId,
+                'start-date': thirtyDaysAgo.toISOString().split('T')[0],
+                'end-date': 'today',
+                'metrics': 'ga:users,ga:sessions,ga:pageviews'
+            });
+
+            const data = response.result;
+            if (data.rows && data.rows[0]) {
+                // Auto-fill the form fields
+                document.getElementById('monthlyTraffic').value = data.rows[0][0]; // Users
+                
+                // Calculate monthly growth (if available)
+                if (data.rows.length > 1) {
+                    const currentTraffic = parseInt(data.rows[0][0]);
+                    const previousTraffic = parseInt(data.rows[1][0]);
+                    const growth = ((currentTraffic - previousTraffic) / previousTraffic) * 100;
+                    document.getElementById('trafficGrowth').value = growth.toFixed(2);
+                }
+                
+                // Show success message
+                document.querySelector('.analytics-status').innerHTML = 
+                    '<p class="success"><i class="fas fa-check-circle"></i> Data fetched successfully</p>';
+            }
+        } catch (error) {
+            console.error('Error fetching analytics data:', error);
+            document.querySelector('.analytics-status').innerHTML = 
+                `<p class="error"><i class="fas fa-times-circle"></i> Error fetching data: ${error.message}</p>`;
+        }
+    }
+
+    // Add this to your existing code
+    document.addEventListener('DOMContentLoaded', function() {
+        // Load the Google Analytics API
+        const script = document.createElement('script');
+        script.src = 'https://apis.google.com/js/api.js';
+        script.onload = function() {
+            initGoogleAnalytics();
+        };
+        document.body.appendChild(script);
+        
+        // ... rest of your existing code ...
+    });
 
     // Add this CSS for loading state
     const loadingStyle = document.createElement('style');
@@ -617,4 +704,85 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Tech Stack:', document.getElementById('techStack').value);
     console.log('Assets:', Array.from(document.querySelectorAll('input[name="assets"]:checked'))
         .map(checkbox => checkbox.value));
+
+    // Add this function for the coming soon notification
+    function showComingSoonNotification() {
+        const notification = document.createElement('div');
+        notification.className = 'coming-soon-notification';
+        notification.innerHTML = `
+            <div class="notification-content">
+                <i class="fas fa-tools"></i>
+                <p>We're working on integrating Google Analytics! This feature will be available soon.</p>
+            </div>
+        `;
+        document.body.appendChild(notification);
+
+        // Remove notification after 3 seconds
+        setTimeout(() => {
+            notification.classList.add('fade-out');
+            setTimeout(() => notification.remove(), 300);
+        }, 3000);
+    }
+
+    // Add styles for the notification
+    const notificationStyles = document.createElement('style');
+    notificationStyles.textContent = `
+        .coming-soon-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4b5563;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .notification-content {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .notification-content i {
+            font-size: 1.25rem;
+        }
+
+        .notification-content p {
+            margin: 0;
+            font-size: 0.875rem;
+        }
+
+        .coming-soon-notification.fade-out {
+            animation: slideOut 0.3s ease-out forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(notificationStyles);
+
+    // Make the function globally available
+    window.showComingSoonNotification = showComingSoonNotification;
 }); 

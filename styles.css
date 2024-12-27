@@ -133,55 +133,49 @@ nav {
 
 /* Hero Section */
 .hero {
-    padding: 6rem 5% 5rem;
-    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
-    position: relative;
+    padding: 4rem 2rem;
+    background: linear-gradient(to bottom, #f8fafc, #f1f5f9);
+    text-align: center;
 }
 
 .hero-content {
-    max-width: 1200px;
+    max-width: 900px;
     margin: 0 auto;
-    text-align: center;
-    position: relative;
-    z-index: 2;
 }
 
 .hero h1 {
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-size: 3.5rem;
     line-height: 1.2;
+    color: #111827;
     margin-bottom: 1.5rem;
-    color: var(--text-color);
     font-weight: 700;
 }
 
 .hero-description {
-    max-width: 800px;
-    margin: 0 auto 2.5rem;
+    max-width: 600px;
+    margin: 0 auto 2rem;
 }
 
 .main-pitch {
-    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    font-size: 1.25rem;
     color: #4b5563;
     line-height: 1.6;
 }
 
 .hero-features {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 1.5rem;
-    margin: 0 auto 3rem;
-    max-width: 900px;
+    gap: 3rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
 }
 
 .feature {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    padding: 0.75rem 1.25rem;
-    background: white;
-    border-radius: 0.5rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    font-size: 1.125rem;
+    color: #374151;
 }
 
 .feature i {
@@ -189,44 +183,26 @@ nav {
     font-size: 1.25rem;
 }
 
-.feature span {
-    color: var(--text-color);
-    font-size: 1rem;
-    font-weight: 500;
-}
-
 .hero-cta {
     margin-bottom: 3rem;
 }
 
 .cta-button {
-    font-size: 1.125rem;
-    padding: 1rem 2rem;
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 0.5rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
-    transition: all 0.2s ease;
-}
-
-.cta-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(37, 99, 235, 0.25);
+    font-size: 1.25rem;
+    padding: 1rem 2.5rem;
+    gap: 0.75rem;
 }
 
 .cta-subtext {
     margin-top: 1rem;
     color: #6b7280;
+    font-size: 1rem;
 }
 
 .hero-metrics {
     display: flex;
     justify-content: center;
-    gap: 3rem;
+    gap: 5rem;
     flex-wrap: wrap;
 }
 
@@ -235,35 +211,92 @@ nav {
 }
 
 .metric-value {
-    font-size: 2.25rem;
+    display: block;
+    font-size: 2.5rem;
     font-weight: 700;
     color: var(--primary-color);
-    line-height: 1.2;
+    margin-bottom: 0.5rem;
 }
 
 .metric-label {
+    font-size: 1rem;
     color: #4b5563;
-    font-size: 0.95rem;
-    font-weight: 500;
+}
+
+/* Responsive Hero Styles */
+@media (max-width: 1024px) {
+    .hero h1 {
+        font-size: 3rem;
+    }
+
+    .hero-features {
+        gap: 2rem;
+    }
+
+    .hero-metrics {
+        gap: 4rem;
+    }
 }
 
 @media (max-width: 768px) {
     .hero {
-        padding: 4rem 1rem;
+        padding: 3rem 1.5rem;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .main-pitch {
+        font-size: 1.125rem;
+    }
+
+    .feature {
+        font-size: 1rem;
+    }
+
+    .hero-metrics {
+        gap: 2rem;
+    }
+
+    .metric-value {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: 2rem 1rem;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .hero-description {
+        margin-bottom: 1.5rem;
     }
 
     .hero-features {
         flex-direction: column;
         align-items: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
     }
 
-    .feature {
-        width: 100%;
-        justify-content: center;
+    .cta-button {
+        font-size: 1.125rem;
+        padding: 0.875rem 1.5rem;
     }
 
     .hero-metrics {
-        gap: 2rem;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .metric-value {
+        font-size: 1.75rem;
     }
 }
 

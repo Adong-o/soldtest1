@@ -10,20 +10,82 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <header class="dashboard-header">
-        <nav class="dashboard-nav">
-            <div class="nav-left">
-                <a href="./dashboard.html" class="back-link">
+    <header class="page-header">
+        <div class="header-container">
+            <div class="header-left">
+                <a href="./dashboard.html" class="back-button">
                     <i class="fas fa-arrow-left"></i>
-                    Back to Dashboard
+                    <span>Back to Dashboard</span>
                 </a>
             </div>
-            <div class="nav-center">
-                <h1>Create New Listing</h1>
+            
+            <div class="header-center">
+                <div class="page-title">
+                    <h1>Create New Listing</h1>
+                    <p class="subtitle">List your SaaS business for sale</p>
+                </div>
             </div>
-            <div class="nav-right"></div>
-        </nav>
+            
+            <div class="header-right">
+                <button type="button" class="help-button">
+                    <i class="fas fa-question-circle"></i>
+                    <span>Help</span>
+                </button>
+            </div>
+        </div>
     </header>
+
+    <!-- Help Modal -->
+    <div id="helpModal" class="help-modal">
+        <div class="help-modal-content">
+            <div class="help-modal-header">
+                <h2><i class="fas fa-info-circle"></i> Common Issues & Solutions</h2>
+                <button class="close-help-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="help-modal-body">
+                <div class="help-section">
+                    <h3>Website URL Format</h3>
+                    <div class="example-box">
+                        <p class="correct">
+                            <i class="fas fa-check-circle"></i>
+                            Correct: <code>https://yoursaas.com</code>
+                        </p>
+                        <p class="incorrect">
+                            <i class="fas fa-times-circle"></i>
+                            Incorrect: <code>yoursaas.com</code> or <code>www.yoursaas.com</code>
+                        </p>
+                        <p class="help-tip">Always include <code>https://</code> at the beginning of your website URL.</p>
+                    </div>
+                </div>
+
+                <div class="help-section">
+                    <h3>Twitter/X Profile URL</h3>
+                    <div class="example-box">
+                        <p class="correct">
+                            <i class="fas fa-check-circle"></i>
+                            Correct: <code>https://twitter.com/username</code>
+                        </p>
+                        <p class="incorrect">
+                            <i class="fas fa-times-circle"></i>
+                            Incorrect: <code>@username</code> or <code>twitter.com/username</code>
+                        </p>
+                        <p class="help-tip">Make sure to include the full URL with <code>https://</code></p>
+                    </div>
+                </div>
+
+                <div class="help-section">
+                    <h3>Other Tips</h3>
+                    <ul class="help-tips-list">
+                        <li>All financial figures should be entered as numbers only (no currency symbols or commas)</li>
+                        <li>Make sure to complete all required fields marked with an asterisk (*)</li>
+                        <li>Double-check your contact information for accuracy</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <main class="create-listing-main">
         <form id="createListingForm" class="listing-form">
@@ -237,17 +299,16 @@
                     <div class="metrics-section">
                         <h3 class="metrics-section-title">Traffic & Analytics</h3>
                         <div class="analytics-connect">
-                            <div class="helper-text">
-                                <i class="fas fa-info-circle"></i>
-                                Connecting with google analytics feature coming soon - still testing
+                            <div class="analytics-status">
+                                <p class="info">
+                                    <i class="fas fa-info-circle"></i>
+                                    Google Analytics integration coming soon! For now, please enter your metrics manually.
+                                </p>
                             </div>
-                            <button type="button" class="btn-connect-analytics" onclick="connectGoogleAnalytics()">
+                            <button type="button" class="btn-connect-analytics" onclick="showComingSoonNotification()">
                                 <i class="fab fa-google"></i>
                                 Connect Google Analytics
                             </button>
-                            <div id="analyticsAccounts" class="analytics-accounts">
-                                <!-- Analytics accounts will be populated here -->
-                            </div>
                         </div>
                         
                         <div class="metrics-grid">
@@ -262,7 +323,7 @@
                                 <label for="trafficGrowth">Traffic Growth Rate</label>
                                 <div class="input-with-suffix">
                                     <input type="number" id="trafficGrowth" 
-                                        placeholder="Monthly traffic growth"
+                                        placeholder="Monthly growth percentage"
                                         title="Monthly percentage increase in traffic">
                                     <span class="suffix">%</span>
                                 </div>
@@ -412,5 +473,34 @@
     </main>
 
     <script type="module" src="create-listing.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const helpButton = document.querySelector('.help-button');
+        const helpModal = document.getElementById('helpModal');
+        const closeButton = document.querySelector('.close-help-modal');
+
+        helpButton.addEventListener('click', function() {
+            helpModal.classList.add('active');
+        });
+
+        closeButton.addEventListener('click', function() {
+            helpModal.classList.remove('active');
+        });
+
+        // Close modal when clicking outside
+        helpModal.addEventListener('click', function(e) {
+            if (e.target === helpModal) {
+                helpModal.classList.remove('active');
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && helpModal.classList.contains('active')) {
+                helpModal.classList.remove('active');
+            }
+        });
+    });
+    </script>
 </body>
 </html> 

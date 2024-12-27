@@ -1,24 +1,24 @@
 .marketplace-main {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 1rem;
 }
 
 .marketplace-header {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
 }
 
 .marketplace-header h1 {
-    font-size: 2.5rem;
+    font-size: 1.75rem;
     color: #111827;
     margin-bottom: 0.5rem;
 }
 
 .marketplace-header p {
     color: #6b7280;
-    font-size: 1.125rem;
-    margin-bottom: 2rem;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .search-bar {
@@ -66,8 +66,8 @@
 
 .marketplace-content {
     display: grid;
-    grid-template-columns: 250px 1fr;
-    gap: 2rem;
+    grid-template-columns: 1fr;
+    gap: 1rem;
     align-items: start;
 }
 
@@ -164,21 +164,21 @@
 
 .listings-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: 1fr;
     gap: 1.5rem;
-    padding: 1rem 0;
+    padding: 0.5rem 0;
 }
 
 .listing-card {
     background: white;
     border: 1px solid #e5e7eb;
-    border-radius: 1rem;
+    border-radius: 0.75rem;
     overflow: hidden;
     transition: all 0.2s;
     display: flex;
     flex-direction: column;
+    width: 100%;
     min-width: 0;
-    max-width: 100%;
 }
 
 .listing-card:hover {
@@ -187,7 +187,7 @@
 }
 
 .listing-header {
-    padding: 1.5rem;
+    padding: 1.25rem;
     border-bottom: 1px solid #e5e7eb;
     background: #f9fafb;
 }
@@ -209,7 +209,7 @@
 }
 
 .listing-body {
-    padding: 1.5rem;
+    padding: 1.25rem;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -229,15 +229,15 @@
 .listing-metrics {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 0.75rem;
+    gap: 1rem;
 }
 
 .metric {
     text-align: center;
-    padding: 0.75rem;
+    padding: 1rem 0.75rem;
     background: #f9fafb;
     border-radius: 0.5rem;
-    min-width: 0;
+    width: 100%;
 }
 
 .metric .label {
@@ -251,13 +251,15 @@
     font-size: 1rem;
     font-weight: 600;
     color: #111827;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    font-feature-settings: "tnum";
+    font-variant-numeric: tabular-nums;
+    word-break: break-word;
+    white-space: normal;
+    line-height: 1.2;
 }
 
 .listing-footer {
-    padding: 1.5rem;
+    padding: 1.25rem;
     background: #f9fafb;
     border-top: 1px solid #e5e7eb;
     display: flex;
@@ -588,3 +590,237 @@
         font-size: 0.875rem;
     }
 } 
+
+
+/* Base responsive setup */
+@media (max-width: 1200px) {
+    .marketplace-main {
+        padding: 1rem;
+    }
+    
+    .marketplace-header h1 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .marketplace-main {
+        padding: 1rem;
+    }
+
+    .marketplace-content {
+        grid-template-columns: 1fr;
+    }
+
+    .filters-sidebar {
+        position: static;
+        margin-bottom: 2rem;
+    }
+    
+    .listings-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .marketplace-header h1 {
+        font-size: 2rem;
+    }
+    
+    .marketplace-header p {
+        font-size: 1rem;
+    }
+    
+    .search-bar {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .search-bar input {
+        width: 100%;
+    }
+    
+    .listing-card {
+        margin: 0 auto;
+        width: 100%;
+        max-width: 400px;
+    }
+    
+    .listing-footer {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .btn-save, .btn-view-details, .btn-contact {
+        width: 100%;
+    }
+    
+    /* Modal adjustments */
+    .modal-content {
+        width: 95%;
+        margin: 1rem;
+        max-height: 85vh;
+    }
+    
+    .listing-details-header {
+        padding: 1rem;
+    }
+    
+    .listing-details-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .header-badges {
+        flex-wrap: wrap;
+    }
+    
+    .listing-details-grid {
+        padding: 1rem;
+        gap: 1rem;
+    }
+    
+    .metrics-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .listings-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .listing-card {
+        max-width: 100%;
+    }
+
+    .listing-metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .filters-section {
+        padding: 1rem;
+    }
+
+    .filter-group select {
+        padding: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .marketplace-main {
+        padding: 0.5rem;
+    }
+    
+    .marketplace-header {
+        margin-bottom: 1.5rem;
+    }
+    
+    .listing-header {
+        padding: 1rem;
+    }
+    
+    .listing-body {
+        padding: 1rem;
+    }
+    
+    .listing-metrics {
+        grid-template-columns: 1fr;
+    }
+    
+    .metric {
+        padding: 0.5rem;
+    }
+    
+    .business-type {
+        padding: 0.25rem 0.75rem;
+        font-size: 0.75rem;
+    }
+    
+    .modal-actions {
+        padding: 1rem;
+    }
+}
+
+/* Touch-friendly improvements */
+@media (hover: none) {
+    .btn-save, .btn-view-details, .btn-contact, .clear-filters-btn {
+        padding: 0.75rem 1rem;
+        min-height: 44px; /* Minimum touch target size */
+    }
+    
+    select {
+        min-height: 44px;
+    }
+    
+    .close-modal {
+        width: 44px;
+        height: 44px;
+    }
+}
+
+@media (min-width: 480px) {
+    .marketplace-main {
+        padding: 1.5rem;
+    }
+
+    .listings-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+}
+
+@media (min-width: 768px) {
+    .marketplace-main {
+        padding: 2rem;
+    }
+
+    .marketplace-header h1 {
+        font-size: 2.25rem;
+    }
+
+    .marketplace-header p {
+        font-size: 1.125rem;
+    }
+
+    .listings-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .listing-metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .marketplace-content {
+        grid-template-columns: 250px 1fr;
+        gap: 2rem;
+    }
+
+    .filters-sidebar {
+        position: sticky;
+        top: 2rem;
+    }
+
+    .listings-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+/* Adjust metric sizes for different screen sizes */
+@media (max-width: 1200px) {
+    .metric .value {
+        font-size: 0.9375rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .listing-metrics {
+        gap: 0.75rem;
+    }
+    
+    .metric {
+        padding: 0.75rem 0.5rem;
+    }
+}

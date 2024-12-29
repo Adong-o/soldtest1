@@ -1,17 +1,20 @@
 // Static featured listings data
-/*
+
 const featuredListings = [
     {
-        businessName: "SaaSHub Analytics",
-        businessType: "Analytics Platform",
+        businessName: "SoldSaas",
+        businessType: "Marketplace",
         monthlyRecurringRevenue: 25000,
-        monthlyUsers: 1500,
-        askingPrice: 750000,
-        description: "Complete analytics solution for SaaS businesses with user tracking, revenue metrics, and custom dashboards.",
-        twitterHandle: "@SaaSHubAnalytics",
-        features: ["User Tracking", "Revenue Analytics", "Custom Dashboards", "API Access"],
-        techStack: ["React", "Node.js", "MongoDB"],
-        monthlyTraffic: 25000
+        monthlyUsers: 20000,
+        askingPrice: 5000,
+        description: "SoldSaaS is a reliable marketplace for buying and selling SaaS businesses. We simplify the process, connecting buyers and sellers securely. Whether you're investing or selling, our platform offers the tools and support needed for smooth, professional transactions.",
+        twitterHandle: "@AdongoJakes",
+        features: ["User authentication",
+            "SaaS listings marketplace",
+            "Dashboard for managing listings",
+            "Real-time updates"],
+        techStack: ["HTML, CSS", "JavaScript", "Firebase"],
+        monthlyTraffic: 20000
     },
     {
         businessName: "CloudForm Pro",
@@ -37,7 +40,7 @@ const featuredListings = [
         techStack: ["React", "Node.js", "MongoDB"],
         monthlyTraffic: 32000
     }
-];*/
+];
 
 
 function displayFeaturedListings() {

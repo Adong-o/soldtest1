@@ -4,7 +4,7 @@ const featuredListings = [
     {
         businessName: "SoldSaas",
         businessType: "Marketplace",
-        monthlyRecurringRevenue: 25000,
+        monthlyRecurringRevenue: 200,
         monthlyUsers: 20000,
         askingPrice: 5000,
         description: "SoldSaaS is a reliable marketplace for buying and selling SaaS businesses. We simplify the process, connecting buyers and sellers securely. Whether you're investing or selling, our platform offers the tools and support needed for smooth, professional transactions.",

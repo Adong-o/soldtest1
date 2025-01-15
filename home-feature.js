@@ -286,27 +286,32 @@ style.textContent = `
         align-items: center;
         justify-content: center;
         z-index: 1000;
+        backdrop-filter: blur(5px);
     }
 
     .modal-content {
         background: white;
         border-radius: 1rem;
-        width: 90%;
+        width: 95%;
         max-width: 800px;
         max-height: 90vh;
         overflow-y: auto;
         position: relative;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     }
 
     .modal-header {
-        padding: 2rem;
+        padding: 3rem;
         background: linear-gradient(135deg, var(--primary-color), #1e40af);
         color: white;
         position: relative;
     }
 
     .modal-body {
-        padding: 2rem;
+        padding: 3rem;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
     }
 
     .close-modal {
@@ -320,9 +325,10 @@ style.textContent = `
     }
 
     .metrics-grid {
+        grid-column: span 2;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 1rem;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
         margin-bottom: 2rem;
     }
 
@@ -352,6 +358,7 @@ style.textContent = `
 
     .details-section {
         margin-top: 2rem;
+        grid-column: span 2;
     }
 
     .details-section h3 {
@@ -397,12 +404,35 @@ style.textContent = `
         border-radius: 0.5rem;
         text-decoration: none;
         font-weight: 500;
-        margin-top: 2rem;
-        transition: background-color 0.2s;
+        margin-top: auto;
+        grid-column: span 2;
+        justify-content: center;
+        width: fit-content;
+        margin: 2rem auto 0;
     }
 
     .twitter-connect-btn:hover {
         background: #1a8cd8;
+    }
+
+    @media (max-width: 768px) {
+        .modal-content {
+            width: 95%;
+            margin: 1rem;
+        }
+
+        .modal-body {
+            grid-template-columns: 1fr;
+            padding: 1.5rem;
+        }
+
+        .metrics-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .modal-header {
+            padding: 2rem;
+        }
     }
 `;
 
